@@ -7,7 +7,7 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/ConnectScene.unity
-    guid: 8250aa71086ea224d85b5ec680cb3aee
+    guid: b21a91f417fdc7b41b531772ff092fcb
   - enabled: 1
     path: Assets/Scenes/StreamScene.unity
     guid: a05945d2cb69b1f4babebadc52f91576

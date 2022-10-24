@@ -45,8 +45,7 @@ public class StreamScript : MonoBehaviour
 
         if (jpeg_header.magic == 0xBC)
         {
-            while (current_buffer_offset < jpeg_header.size)
-            {
+            while (current_buffer_offset < jpeg_header.size) {
                 packet.length = aideck_reader.ReadUInt16();
                 packet.ignored = aideck_reader.ReadUInt16();
                 receive_buffer(packet.length - 2);

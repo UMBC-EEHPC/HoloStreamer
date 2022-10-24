@@ -12,16 +12,14 @@ using static ViewerData;
 public class AIdeckConnectionScript : MonoBehaviour
 {
     private TMP_InputField aideck_ip_field;
-    private Button connection_button;
 
     private const int AIDECK_PORT = 5000;
 
     void OnEnable()
     {
-        var canvas = GetComponentInParent<Canvas>().rootCanvas;
+        var canvas = GetComponentInParent<Canvas>();
 
         aideck_ip_field = canvas.GetComponent<TMP_InputField>();
-        connection_button = canvas.GetComponent<Button>();
     }
 
     void Update()
@@ -30,7 +28,11 @@ public class AIdeckConnectionScript : MonoBehaviour
 
     public void connect_to_aideck()
     {
-        Socket socket = connect_socket("192.168.4.1", AIDECK_PORT);
+        var canvas = GetComponentInParent<Canvas>().rootCanvas;
+
+        aideck_ip_field = GameObject.Find("AIdeckIPField").GetComponent<TMP_InputField>();
+
+        Socket socket = connect_socket(aideck_ip_field.text, AIDECK_PORT);
 
         if (socket != null)
         {
