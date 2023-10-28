@@ -12,7 +12,7 @@ using static ViewerData;
 
 public static class ViewerData
 {
-    public static Socket aideck_socket;
+    public static Socket server_socket;
 #if !UNITY_EDITOR
     public static StreamSocket socket;
 #endif

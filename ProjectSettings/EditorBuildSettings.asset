@@ -5,15 +5,21 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ConnectScene.unity
     guid: b21a91f417fdc7b41b531772ff092fcb
-  - enabled: 1
-    path: Assets/Scenes/StreamScene.unity
-    guid: a05945d2cb69b1f4babebadc52f91576
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/AutoConnectScene.unity
+    guid: 2d9d8ab443a8a4e47844477831401135
+  - enabled: 1
+    path: Assets/Scenes/ControlScene.unity
+    guid: a196b4bf484ef504a8e27628d2973c77
+  - enabled: 0
+    path: Assets/Scenes/StreamScene.unity
+    guid: a05945d2cb69b1f4babebadc52f91576
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 1e43fc5d81fe498448f493bc58a76552, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 470ceb9b842829a4c86aca3bf7785fbe, type: 2}

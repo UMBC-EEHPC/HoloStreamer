@@ -3,7 +3,7 @@
 --- !u!129 &1
 PlayerSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 23
+  serializedVersion: 24
   productGUID: 3edd88b2d3497ce488ee1dfd3a6572e2
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
@@ -121,6 +121,7 @@ PlayerSettings:
   switchNVNOtherPoolsGranularity: 16777216
   switchNVNMaxPublicTextureIDCount: 0
   switchNVNMaxPublicSamplerIDCount: 0
+  switchMaxWorkerMultiple: 8
   stadiaPresentMode: 0
   stadiaTargetFramerate: 0
   vulkanNumSwapchainBuffers: 3
@@ -221,8 +222,6 @@ PlayerSettings:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 1378691751348721603, guid: 1e43fc5d81fe498448f493bc58a76552, type: 2}
-  - {fileID: -619112537569342604, guid: 470ceb9b842829a4c86aca3bf7785fbe, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -263,10 +262,10 @@ PlayerSettings:
   StripUnusedMeshComponents: 1
   VertexChannelCompressionMask: 4054
   iPhoneSdkVersion: 988
-  iOSTargetOSVersionString: 11.0
+  iOSTargetOSVersionString: 12.0
   tvOSSdkVersion: 0
   tvOSRequireExtendedGameController: 0
-  tvOSTargetOSVersionString: 11.0
+  tvOSTargetOSVersionString: 12.0
   uIPrerenderedIcon: 0
   uIRequiresPersistentWiFi: 0
   uIRequiresFullScreen: 1
@@ -373,6 +372,7 @@ PlayerSettings:
   - m_BuildTarget: WebGL
     m_StaticBatching: 0
     m_DynamicBatching: 0
+  m_BuildTargetShaderSettings: []
   m_BuildTargetGraphicsJobs:
   - m_BuildTarget: MacStandaloneSupport
     m_GraphicsJobs: 0
@@ -424,6 +424,8 @@ PlayerSettings:
     m_Devices:
     - Oculus
     - OpenVR
+  m_DefaultShaderChunkSizeInMB: 16
+  m_DefaultShaderChunkCount: 0
   openGLRequireES31: 0
   openGLRequireES31AEP: 0
   openGLRequireES32: 0
@@ -467,6 +469,7 @@ PlayerSettings:
   switchSocketConcurrencyLimit: 14
   switchScreenResolutionBehavior: 2
   switchUseCPUProfiler: 0
+  switchEnableFileSystemTrace: 0
   switchUseGOLDLinker: 0
   switchLTOSetting: 0
   switchApplicationID: 0x01004b9000490000
@@ -544,7 +547,6 @@ PlayerSettings:
   switchReleaseVersion: 0
   switchDisplayVersion: 1.0.0
   switchStartupUserAccount: 0
-  switchTouchScreenUsage: 0
   switchSupportedLanguagesMask: 0
   switchLogoType: 0
   switchApplicationErrorCodeCategory: 
@@ -586,6 +588,7 @@ PlayerSettings:
   switchNativeFsCacheSize: 32
   switchIsHoldTypeHorizontal: 0
   switchSupportedNpadCount: 8
+  switchEnableTouchScreen: 1
   switchSocketConfigEnabled: 0
   switchTcpInitialSendBufferSize: 32
   switchTcpInitialReceiveBufferSize: 64
@@ -598,6 +601,7 @@ PlayerSettings:
   switchNetworkInterfaceManagerInitializeEnabled: 1
   switchPlayerConnectionEnabled: 1
   switchUseNewStyleFilepaths: 0
+  switchUseLegacyFmodPriorities: 1
   switchUseMicroSleepForYield: 1
   switchEnableRamDiskSupport: 0
   switchMicroSleepForYieldTime: 25
@@ -697,12 +701,27 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
-  scriptingDefineSymbols: {}
+  webGLPowerPreference: 2
+  scriptingDefineSymbols:
+    Windows Store Apps: 
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
   il2cppCompilerConfiguration: {}
-  managedStrippingLevel: {}
+  managedStrippingLevel:
+    EmbeddedLinux: 1
+    GameCoreScarlett: 1
+    GameCoreXboxOne: 1
+    Lumin: 1
+    Nintendo Switch: 1
+    PS4: 1
+    PS5: 1
+    Stadia: 1
+    WebGL: 1
+    Windows Store Apps: 1
+    XboxOne: 1
+    iPhone: 1
+    tvOS: 1
   incrementalIl2cppBuild: {}
   suppressCommonWarnings: 1
   allowUnsafeCode: 0
@@ -722,7 +741,7 @@ PlayerSettings:
   metroCertificatePassword: 
   metroCertificateSubject: DefaultCompany
   metroCertificateIssuer: DefaultCompany
-  metroCertificateNotAfter: 00d3a414b5f6d901
+  metroCertificateNotAfter: 000350ea821cdb01
   metroApplicationDescription: Template_3D
   wsaImages: {}
   metroTileShortName: HoloStreamer
@@ -792,6 +811,7 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 2
+  windowsGamepadBackendHint: 0
   cloudProjectId: 
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
