@@ -12,6 +12,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
+using System;
 
 #if !UNITY_EDITOR 
 using Windows.Networking.Sockets;
@@ -23,6 +24,9 @@ using static ViewerData;
 
 public class StreamScript : MonoBehaviour
 {
+    private const int SERVER_PORT = 25555;
+    private const int BROADCAST_PORT = 32222;
+
     private static Mutex mut = new Mutex();
     private RawImage image;
     private byte[] buffer;
@@ -50,7 +54,12 @@ public class StreamScript : MonoBehaviour
         max_buffer_size = 131072;
         buffer = new byte[max_buffer_size];
         current_buffer_offset = 0;
-        
+
+        // Making connection to the server.
+        connect_to_server(debug_text);
+
+        // Connection has been established.
+
         utf8_encoding = Encoding.UTF8;
 
         server_stream = new NetworkStream(ViewerData.server_socket);
@@ -103,6 +112,75 @@ public class StreamScript : MonoBehaviour
             Debug.Log(debug_text.text);
         }
 #endif
+    }
+
+    public void connect_to_server(TMP_Text connection_text) {
+        Thread.Sleep(15000);
+        string received_ip = "10.191.49.73";
+        connection_text.text = "Attempting to connect to " + received_ip;
+
+        Socket socket = connect_socket(connection_text, received_ip, SERVER_PORT);
+
+        if (socket != null) {
+            ViewerData.server_socket = socket;
+        }
+        else {
+            connection_text.text = "Failed to connect, restarting server autodiscovery...";
+            Debug.Log(connection_text.text);
+        }
+    }
+
+    private string listen_for_ip() {
+        using (UdpClient listener = new UdpClient(BROADCAST_PORT)) {
+            IPEndPoint group_endpoint = new IPEndPoint(IPAddress.Any, BROADCAST_PORT);
+            while (true) {
+                try {
+                    Debug.Log("Listening for IP address...");
+                    byte[] bytes = listener.Receive(ref group_endpoint);
+                    string received_ip = Encoding.UTF8.GetString(bytes, 0, bytes.Length);
+                    Debug.Log("Received " + received_ip);
+                    return received_ip;
+                }
+                catch (Exception e) {
+                    Debug.Log(e.ToString());
+                }
+            }
+        }
+    }
+
+    private Socket connect_socket(TMP_Text connection_text, string ip, int port) {
+        while (true) {
+            try {
+                IPHostEntry host_entry = Dns.GetHostEntry(ip);
+                IPEndPoint ip_endpoint = new IPEndPoint(host_entry.AddressList[0], port);
+
+                Socket socket = new Socket(ip_endpoint.AddressFamily,
+                                           SocketType.Stream, ProtocolType.Tcp);
+
+                Debug.Log("Making connection to: " + ip);
+
+                IAsyncResult result = socket.BeginConnect(ip_endpoint, null, null);
+
+                bool success = result.AsyncWaitHandle.WaitOne(15000, true);
+
+                if (success) {
+                    socket.ReceiveTimeout = 0;
+                    socket.SendTimeout = 0;
+                    socket.EndConnect(result);
+
+                    Debug.Log("Made connection");
+                    return socket;
+                }
+                else {
+                    Debug.Log("Failed to connect");
+                    socket.EndConnect(result);
+                }
+            } catch (SocketException e) {
+                connection_text.text = "Caught exception, restarting connection attempt: " + e.ToString();
+                Debug.Log(connection_text.text);
+            }
+        }
+        return null;
     }
 
     void receiver_thread()
